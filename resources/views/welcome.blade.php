@@ -78,6 +78,7 @@
             transition: color 0.3s;
             padding: 5px 0;
             position: relative;
+            cursor: pointer;
         }
         
         .main-nav a:hover {
@@ -117,6 +118,8 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            border: none;
+            outline: none;
         }
         
         .btn-primary {
@@ -145,7 +148,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
-        
         /* ELMS Section */
         .elms-section {
             text-align: center;
@@ -172,7 +174,6 @@
             margin-bottom: 30px;
             font-weight: 300;
         }
-        
         
         /* Footer */
         .main-footer {
@@ -249,16 +250,157 @@
             transform: translateY(-3px);
         }
         
+        /* Login Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.4s ease;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #1a5276 0%, #00215E 100%);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .modal-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #1a5276;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.1);
+        }
+        
+        .modal-footer {
+            padding: 20px 30px 30px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #1a5276 0%, #00215E 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(26, 82, 118, 0.2);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #4dabf7;
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .form-footer a {
+            color: #1a5276;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
-            .hero-content h2 {
-                font-size: 2.8rem;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
             .nav-container {
                 flex-direction: column;
                 gap: 20px;
@@ -271,14 +413,6 @@
         }
         
         @media (max-width: 768px) {
-            .hero-content h2 {
-                font-size: 2.3rem;
-            }
-            
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-            
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -290,22 +424,22 @@
                 justify-content: center;
             }
             
-            .section-title h2 {
-                font-size: 2rem;
+            .modal-content {
+                width: 95%;
             }
         }
         
         @media (max-width: 480px) {
-            .hero-content h2 {
-                font-size: 2rem;
+            .elms-logo {
+                font-size: 3rem;
             }
             
-            .section {
-                padding: 60px 0;
+            .elms-title {
+                font-size: 1.6rem;
             }
             
-            .service-card {
-                padding: 30px 20px;
+            .modal-body {
+                padding: 20px;
             }
         }
     </style>
@@ -324,7 +458,7 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#home">Login</a></li>   
+                    <li><a id="loginNavBtn">Login</a></li>   
                 </ul>
             </nav>
         </div>
@@ -337,9 +471,9 @@
             <h3 class="elms-title">Employee Leave Management System</h3>
             <p>Streamlining employee leave management for efficient government service delivery.</p>
             <div style="margin-top: 40px;">
-                <a href="YOUR_ELMS_LOGIN_PAGE_URL_HERE" class="btn btn-primary">
+                <button id="loginPortalBtn" class="btn btn-primary">
                     <i class="fas fa-sign-in-alt"></i> Access ELMS Portal
-                </a>
+                </button>
             </div>
         </div>
     </section>
@@ -349,7 +483,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="YOUR_DILG_LOGO_IMAGE_URL_HERE" alt="DILG Logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Department_of_the_Interior_and_Local_Government_%28DILG%29_Seal_-_Logo.svg" alt="DILG Logo" class="logo-image">
                     <h3>DILG Pangasinan</h3>
                     <p>Department of the Interior and Local Government</p>
                 </div>
@@ -377,10 +511,144 @@
         </div>
     </footer>
 
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ELMS Login</h2>
+                <p>Employee Leave Management System</p>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username / Employee ID</label>
+                        <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-footer">
+                            <a href="#" id="forgotPassword">Forgot Password?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button id="submitLogin" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Login to ELMS
+                </button>
+                <div class="form-footer" style="margin-top: 15px;">
+                    <p>Need help? Contact <a href="mailto:support@dilgpangasinan.gov.ph">IT Support</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // DOM Elements
+        const loginModal = document.getElementById('loginModal');
+        const loginNavBtn = document.getElementById('loginNavBtn');
+        const loginPortalBtn = document.getElementById('loginPortalBtn');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const submitLoginBtn = document.getElementById('submitLogin');
+        const loginForm = document.getElementById('loginForm');
+        const forgotPasswordLink = document.getElementById('forgotPassword');
+        
+        // Show modal when clicking login buttons
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        
+        // Hide modal
+        function hideLoginModal() {
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Event Listeners for showing modal
+        loginNavBtn.addEventListener('click', showLoginModal);
+        loginPortalBtn.addEventListener('click', showLoginModal);
+        
+        // Event Listeners for hiding modal
+        closeModalBtn.addEventListener('click', hideLoginModal);
+        
+        // Close modal when clicking outside of modal content
+        loginModal.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                hideLoginModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && loginModal.style.display === 'flex') {
+                hideLoginModal();
+            }
+        });
+        
+        // Handle form submission
+        submitLoginBtn.addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Basic validation
+            if (!username || !password) {
+                alert('Please enter both username and password');
+                return;
+            }
+            
+            // Show loading state
+            const originalText = submitLoginBtn.innerHTML;
+            submitLoginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            submitLoginBtn.disabled = true;
+            
+            // Simulate login process
+            setTimeout(function() {
+                // In a real application, this would be an AJAX request to the server
+                // For demo purposes, we'll just show a success message
+                alert(`Login attempt for user: ${username}\n\nIn a real application, this would authenticate with the ELMS server.`);
+                
+                // Reset button
+                submitLoginBtn.innerHTML = originalText;
+                submitLoginBtn.disabled = false;
+                
+                // Close modal after "successful" login
+                hideLoginModal();
+                
+                // In a real implementation, you would redirect to the ELMS dashboard
+                // window.location.href = 'YOUR_ELMS_DASHBOARD_URL';
+            }, 1500);
+        });
+        
+        // Forgot password handler
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideLoginModal();
+            
+            // In a real application, this would open a password recovery form
+            alert('Password recovery link has been sent to your registered email.\n\n(Simulation: In a real application, this would trigger password reset)');
+        });
+        
+        // Allow form submission with Enter key
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitLoginBtn.click();
+        });
+        
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
+                // Don't prevent default for modal triggers
+                if (this.id === 'loginNavBtn') return;
+                
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
@@ -416,25 +684,6 @@
                     link.classList.add('active');
                 }
             });
-        });
-        
-        // Simple animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, observerOptions);
-        
-        // Observe elements to animate
-        document.querySelectorAll('.service-card, .about-image, .contact-item').forEach(el => {
-            observer.observe(el);
         });
     </script>
 </body>
