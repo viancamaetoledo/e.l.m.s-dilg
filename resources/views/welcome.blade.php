@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DILG Pangasinan</title>
+    <title>DILG Pangasinan - Official Landing Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,437 +14,428 @@
         }
         
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f9fa;
         }
         
-        /* Background Container */
-        #backgroundContainer {
-            position: fixed;
+        /* Header & Navigation */
+        .main-header {
+            background: linear-gradient(135deg, #1a5276 0%, #00215E 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
-        /* Navigation Bar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 40px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
         
-        .logo-area {
+        .logo-section {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
-        .logo-icon {
-            font-size: 2.2rem;
-            color: #1a5276;
+        .logo-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
         }
         
         .logo-text h1 {
-            font-size: 1.5rem;
-            margin-bottom: 2px;
-            color: #1a5276;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
         }
         
-        .logo-text .subtitle {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            color: #555;
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
         
-        .login-btn {
-            background: #1a5276;
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .main-nav a {
             color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-size: 1rem;
+            text-decoration: none;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(26, 82, 118, 0.3);
-        }
-        
-        .login-btn:hover {
-            background: #154360;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 82, 118, 0.4);
-        }
-        
-        /* Login Form Container */
-        .login-container {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            z-index: 2000;
-            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            overflow: hidden;
-        }
-        
-        .login-container.active {
-            right: 0;
-        }
-        
-        .login-background {
-            flex: 1;
-            background-size: cover;
-            background-position: center;
+            font-size: 1rem;
+            transition: color 0.3s;
+            padding: 5px 0;
             position: relative;
         }
         
-        .login-background::after {
+        .main-nav a:hover {
+            color: #4dabf7;
+        }
+        
+        .main-nav a::after {
             content: '';
             position: absolute;
-            top: 0;
+            width: 0;
+            height: 2px;
+            background: #4dabf7;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(26, 82, 118, 0.9), rgba(21, 67, 96, 0.95));
+            bottom: -5px;
+            transition: width 0.3s;
         }
         
-        .login-form-section {
-            flex: 1;
-            background: white;
-            padding: 60px 40px;
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-buttons {
             display: flex;
-            flex-direction: column;
+            gap: 20px;
             justify-content: center;
-            align-items: center;
-            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
         }
         
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        .login-header h2 {
-            font-size: 2.5rem;
-            color: #1a5276;
-            margin-bottom: 10px;
-        }
-        
-        .login-header p {
-            color: #666;
-            font-size: 1rem;
-        }
-        
-        .login-form {
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
+        .btn {
+            padding: 15px 30px;
+            border-radius: 30px;
             font-weight: 600;
-            color: #444;
-            font-size: 0.9rem;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: #1a5276;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(26, 82, 118, 0.2);
-        }
-        
-        .password-container {
-            position: relative;
-        }
-        
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #666;
+            font-size: 1.1rem;
             cursor: pointer;
-        }
-        
-        .remember-forgot {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-        
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .forgot-password {
-            color: #1a5276;
+            transition: all 0.3s ease;
             text-decoration: none;
-            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .forgot-password:hover {
-            text-decoration: underline;
+        .btn-primary {
+            background: white;
+            color: #1a5276;
+            border: 2px solid white;
         }
         
-        .submit-btn {
-            width: 100%;
-            background: #1a5276;
+        .btn-primary:hover {
+            background: transparent;
             color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #FFC55A;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        
+        /* ELMS Section */
+        .elms-section {
+            text-align: center;
+            background: linear-gradient(135deg, #1a5276 0%, #154360 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .elms-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .elms-logo {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .elms-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        
+        /* Footer */
+        .main-footer {
+            background: #0d2c3e;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo img {
+            width: 80px;
             margin-bottom: 20px;
         }
         
-        .submit-btn:hover {
-            background: #154360;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(26, 82, 118, 0.3);
+        .footer-links h4, .footer-contact h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #4dabf7;
         }
         
-        .back-to-home {
-            background: none;
-            border: none;
-            color: #1a5276;
-            font-size: 1rem;
-            cursor: pointer;
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #4dabf7;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 6px;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
             transition: all 0.3s;
         }
         
-        .back-to-home:hover {
-            background: #f0f7ff;
+        .social-links a:hover {
+            background: #1a5276;
+            transform: translateY(-3px);
         }
         
         /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
+        @media (max-width: 992px) {
+            .hero-content h2 {
+                font-size: 2.8rem;
             }
             
-            .logo-text h1 {
-                font-size: 1.3rem;
-            }
-            
-            .login-container {
+            .about-content {
                 flex-direction: column;
             }
             
-            .login-background {
-                height: 30%;
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
             }
             
-            .login-form-section {
-                height: 70%;
-                padding: 40px 20px;
+            .main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2.3rem;
             }
             
-            .login-header h2 {
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .section-title h2 {
                 font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .service-card {
+                padding: 30px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background Container (Empty - to be filled programmatically) -->
-    <div id="backgroundContainer"></div>
-    
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="logo-area">
-            <i class="fas fa-landmark logo-icon"></i>
-            <div class="logo-text">
-                <h1>DILG Pangasinan</h1>
-                <p class="subtitle">Department of the Interior and Local Government</p>
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="container nav-container">
+            <div class="logo-section">
+                <!-- DILG Logo -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Department_of_the_Interior_and_Local_Government_%28DILG%29_Seal_-_Logo.svg" alt="DILG Logo" class="logo-image">
+                <div class="logo-text">
+                    <h1>DILG Pangasinan</h1>
+                    <p>Department of the Interior and Local Government</p>
+                 </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Login</a></li>   
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ELMS Section -->
+    <section id="elms" class="elms-section">
+        <div class="container elms-content">
+            <div class="elms-logo">E.L.M.S</div>
+            <h3 class="elms-title">Employee Leave Management System</h3>
+            <p>Streamlining employee leave management for efficient government service delivery.</p>
+            <div style="margin-top: 40px;">
+                <a href="YOUR_ELMS_LOGIN_PAGE_URL_HERE" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Access ELMS Portal
+                </a>
             </div>
         </div>
-        <button class="login-btn" id="loginBtn">
-            <i class="fas fa-sign-in-alt"></i>
-             <a href="{{route('user.dashboard')}}" class="nav-link">Log in</a>
-        </button>
-    </nav>
-    
-    <!-- Login Form Container -->
-    <div class="login-container" id="loginContainer">
-        <div class="login-background" id="loginBackground"></div>
-        <div class="login-form-section">
-            <div class="login-header">
-                <h2>Welcome Back</h2>
-                <p>Enter your credentials to access the system</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="YOUR_DILG_LOGO_IMAGE_URL_HERE" alt="DILG Logo">
+                    <h3>DILG Pangasinan</h3>
+                    <p>Department of the Interior and Local Government</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#elms">ELMS</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Capitol Complex, Lingayen, Pangasinan</p>
+                    <p><i class="fas fa-phone"></i> (075) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@dilgpangasinan.gov.ph</p>
+                </div>
             </div>
             
-            <form class="login-form" id="loginForm">
-                <div class="form-group">
-                    <label for="username">Username / Employee ID</label>
-                    <input type="text" id="username" class="form-control" placeholder="Enter your username or employee ID" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="password-container">
-                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
-                        <button type="button" class="toggle-password" id="togglePassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="remember-forgot">
-                    <label class="remember-me">
-                        <input type="checkbox" id="rememberMe">
-                        <span>Remember me</span>
-                    </label>
-                    <a href="#" class="forgot-password">Forgot Password?</a>
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-sign-in-alt"></i>
-                   <a href="{{route('user.dashboard')}}" class="nav-link">Log in</a>
-                </button>
-                
-                <button type="button" class="back-to-home" id="backToHome">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to Home
-                </button>
-            </form>
+            <div class="footer-bottom">
+                <p>&copy; 2023 DILG Pangasinan. All rights reserved. | "Let's work together"</p>
+                <p>Promoting peace and order, ensuring public safety, and strengthening local government capabilities.</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // DOM Elements
-        const loginBtn = document.getElementById('loginBtn');
-        const backToHomeBtn = document.getElementById('backToHome');
-        const loginContainer = document.getElementById('loginContainer');
-        const loginBackground = document.getElementById('loginBackground');
-        const loginForm = document.getElementById('loginForm');
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        
-        // Toggle password visibility
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            
-            // Toggle eye icon
-            if (type === 'password') {
-                this.innerHTML = '<i class="fas fa-eye"></i>';
-            } else {
-                this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-            }
-        });
-        
-        // Show login form
-        loginBtn.addEventListener('click', function() {
-            loginContainer.classList.add('active');
-        });
-        
-        // Hide login form and return to home
-        backToHomeBtn.addEventListener('click', function() {
-            loginContainer.classList.remove('active');
-        });
-        
-        // Handle form submission
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple validation
-            if (!username || !password) {
-                alert('Please enter both username and password.');
-                return;
-            }
-            
-            // Show loading state
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-            submitBtn.disabled = true;
-            
-            // Simulate login process
-            setTimeout(() => {
-                // In a real application, this would be an API call
-                // For demo purposes, we'll just show a success message
-                alert('Login successful!');
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                // Reset form
-                loginForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
                 
-                // Close login form
-                loginContainer.classList.remove('active');
-                
-                // In a real application, you would redirect to the main application page
-                // window.location.href = 'main-application.html';
-            }, 1500);
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
         
-        // Function to set background image programmatically
-        function setBackgroundImage(imageUrl) {
-            const backgroundContainer = document.getElementById('backgroundContainer');
-            backgroundContainer.style.backgroundImage = `url('${imageUrl}')`;
-            backgroundContainer.style.backgroundSize = 'cover';
-            backgroundContainer.style.backgroundPosition = 'center';
-            backgroundContainer.style.backgroundRepeat = 'no-repeat';
-        }
+        // Add active class to current navigation item
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.main-nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
         
-        // Function to set login background image programmatically
-        function setLoginBackgroundImage(imageUrl) {
-            loginBackground.style.backgroundImage = `url('${imageUrl}')`;
-        }
+        // Simple animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
         
-        // Example usage (you can call these functions from your program):
-        setBackgroundImage('your-image-url-here');
-        setLoginBackgroundImage('your-login-background-url-here');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements to animate
+        document.querySelectorAll('.service-card, .about-image, .contact-item').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
