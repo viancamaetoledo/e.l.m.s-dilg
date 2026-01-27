@@ -491,8 +491,8 @@
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#elms">ELMS</a></li>
+                        <li><a href="{{route('admin.dashboard')}}">Admin</a></li>
+                        <li><a href="{{ route('user.dashboard') }}">Employee</a></li>
                     </ul>
                 </div>
                 

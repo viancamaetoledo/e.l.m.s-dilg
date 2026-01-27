@@ -8,7 +8,11 @@ class NavigationController extends Controller
 {
     public function goUserDashboard()
     {
-        return view('user-dashboard');
+        return view('Navigation/EmployeeS/Employee-Dashboard');
+    }
+    public function goAdminDashboard()
+    {
+        return view('Navigation/Administration/Admin-Dashboard');
     }
 
     public function Welcome()
