@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<x-layout>
     <title>DILG ELMS - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
@@ -33,97 +29,7 @@
             color: #333;
             overflow-x: hidden;
         }
-        
-        /* Dashboard Layout */
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-        }
-        
-        /* Sidebar Styles */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary-color) 100%);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            z-index: 100;
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            overflow-y: auto;
-        }
-        
-        .sidebar-header {
-            padding: 25px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .sidebar-logo {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-        }
-        
-        .sidebar-title h3 {
-            font-size: 1.2rem;
-            margin-bottom: 3px;
-        }
-        
-        .sidebar-title p {
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-        
-        .sidebar-nav {
-            padding: 20px 0;
-        }
-        
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 25px;
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 4px solid transparent;
-        }
-        
-        .nav-item:hover, .nav-item.active {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-left-color: var(--secondary-color);
-        }
-        
-        .nav-item i {
-            width: 25px;
-            font-size: 1.2rem;
-            margin-right: 15px;
-        }
-        
-        .nav-label {
-            font-weight: 500;
-        }
-        
-        .sidebar-footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-left: var(--sidebar-width);
-            width: calc(100% - var(--sidebar-width));
-        }
-        
+    
         /* Header */
         .main-header {
             height: var(--header-height);
@@ -500,38 +406,6 @@
             }
         }
         
-        @media (max-width: 992px) {
-            .sidebar {
-                width: 70px;
-                overflow: hidden;
-            }
-            
-            .sidebar:hover {
-                width: var(--sidebar-width);
-            }
-            
-            .sidebar-title, .nav-label, .sidebar-footer {
-                opacity: 0;
-            }
-            
-            .sidebar:hover .sidebar-title,
-            .sidebar:hover .nav-label,
-            .sidebar:hover .sidebar-footer {
-                opacity: 1;
-                transition: opacity 0.3s 0.2s;
-            }
-            
-            .main-content {
-                margin-left: 70px;
-                width: calc(100% - 70px);
-            }
-            
-            .sidebar:hover ~ .main-content {
-                margin-left: var(--sidebar-width);
-                width: calc(100% - var(--sidebar-width));
-            }
-        }
-        
         @media (max-width: 768px) {
             .main-header {
                 padding: 0 15px;
@@ -568,54 +442,6 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Department_of_the_Interior_and_Local_Government_%28DILG%29_Seal_-_Logo.svg" alt="DILG Logo" class="sidebar-logo">
-                <div class="sidebar-title">
-                    <h3>DILG ELMS</h3>
-                    <p>Admin Dashboard</p>
-                </div>
-            </div>
-            
-            <nav class="sidebar-nav">
-                <a href="#overview" class="nav-item active" data-tab="overview">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span class="nav-label">Overview Dashboard</span>
-                </a>
-                <a href="#employees" class="nav-item" data-tab="employees">
-                    <i class="fas fa-users"></i>
-                    <span class="nav-label">Employees</span>
-                </a>
-                <a href="#leave-applications" class="nav-item" data-tab="leave-applications">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span class="nav-label">Leave Applications</span>
-                </a>
-                <a href="#cto-applications" class="nav-item" data-tab="cto-applications">
-                    <i class="fas fa-business-time"></i>
-                    <span class="nav-label">CTO Applications</span>
-                </a>
-                <a href="#calendar" class="nav-item" data-tab="calendar">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span class="nav-label">Calendar</span>
-                </a>
-                <a href="#reports" class="nav-item" data-tab="reports">
-                    <i class="fas fa-chart-bar"></i>
-                    <span class="nav-label">Reports</span>
-                </a>
-                <a href="#settings" class="nav-item" data-tab="settings">
-                    <i class="fas fa-cog"></i>
-                    <span class="nav-label">Settings</span>
-                </a>
-            </nav>
-            
-            <div class="sidebar-footer">
-                <p>DILG Pangasinan ELMS v2.1</p>
-            </div>
-        </aside>
-        
-        <!-- Main Content -->
-        <main class="main-content">
             <!-- Header -->
             <header class="main-header">
                 <div class="header-title">
@@ -1198,7 +1024,6 @@
                 </div>
                 
             </div>
-        </main>
     </div>
     
     <!-- Scripts -->
@@ -1420,4 +1245,4 @@
         });
     </script>
 </body>
-</html>
+</x-layout>
