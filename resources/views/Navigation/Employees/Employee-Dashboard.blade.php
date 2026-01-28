@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DILG Pangasinan - Employee Dashboard</title>
+<x-layout2>
+    <title>DILG ELMS - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
     <style>
         * {
             margin: 0;
@@ -30,98 +27,7 @@
             color: var(--dark-color);
         }
         
-        /* Sidebar Styles */
-        .sidebar {
-            width: var(--sidebar-width);
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-        }
         
-        .logo-container {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo {
-            height: 50px;
-            margin-right: 10px;
-        }
-        
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.4rem;
-        }
-        
-        .logo-subtext {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-        
-        .nav-menu {
-            list-style: none;
-        }
-        
-        .nav-item {
-            margin-bottom: 5px;
-        }
-        
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            border-left: 4px solid transparent;
-            cursor: pointer;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-left-color: var(--accent-color);
-        }
-        
-        .nav-icon {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .leave-dropdown {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-        
-        .leave-dropdown.show {
-            max-height: 500px;
-        }
-        
-        .leave-item {
-            padding: 12px 20px 12px 50px;
-        }
-        
-        .leave-item a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            display: block;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-        
-        .leave-item a:hover {
-            color: white;
-        }
         
         /* Main Content Styles */
         .main-content {
@@ -132,12 +38,16 @@
         }
         
         .header {
+            height: var(--header-height);
+            background: white;
+            padding: 0 30px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #dee2e6;
+            justify-content: space-between;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 99;
         }
         
         .header-title h1 {
@@ -582,44 +492,8 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo-container">
-            <div class="logo">
-                <i class="fas fa-landmark" style="font-size: 2.5rem; color: white;"></i>
-            </div>
-            <div>
-                <div class="logo-text">DILG</div>
-                <div class="logo-subtext">Pangasinan</div>
-            </div>
-        </div>
-        
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a class="nav-link active" id="overview-link">
-                    <span class="nav-icon"><i class="fas fa-tachometer-alt"></i></span>
-                    <span class="nav-text">Overview Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="leave-link">
-                    <span class="nav-icon"><i class="fas fa-calendar-alt"></i></span>
-                    <span class="nav-text">Leave Application</span>
-                    <span class="nav-icon ms-auto"></span>
-                </a>
-
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="cto-link">
-                    <span class="nav-icon"><i class="fas fa-clock"></i></span>
-                    <span class="nav-text">CTO Application</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
     
     <!-- Main Content -->
-    <main class="main-content">
         <header class="header">
             <div class="header-title">
                 <h1>Employee Dashboard</h1>
@@ -919,7 +793,6 @@
         <footer class="footer">
             <p>DILG Pangasinan Employee Dashboard &copy; 2026 | Department of the Interior and Local Government - Region I</p>
         </footer>
-    </main>
 
     <script>
         // Toggle leave dropdown
@@ -1174,3 +1047,4 @@
     </script>
 </body>
 </html>
+</x-layout2>
