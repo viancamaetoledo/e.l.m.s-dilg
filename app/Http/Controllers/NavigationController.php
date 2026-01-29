@@ -37,11 +37,11 @@ class NavigationController extends Controller
 
     public function goAdminLeaveRecord()
     {
-        return view('Navigation/Administration/Admin-Leave-Application');
+        return view('Navigation/Administration/Leave-Application');
     }
     public function goAdminCTORecord()
     {
-        return view('Navigation/Administration/Admin-CTO-Application');
+        return view('Navigation/Administration/CTO-Application');
     }
     public function goAdminReports()
     {
