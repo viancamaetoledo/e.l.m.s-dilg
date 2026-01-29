@@ -7,21 +7,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* CSS Variables */
-        :root {
-            --primary-color: #1a365d;
-            --primary-dark: #0d2342;
-            --secondary-color: #2d9cdb;
-            --accent-color: #ff6b6b;
-            --sidebar-width: 260px;
-            --header-height: 70px;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        :root {
+           --primary-color: #1a5276;
+            --primary-dark: #00215E;
+            --secondary-color: #FFC55A;
+            --sidebar-width: 280px;
+            --header-height: 70px;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+        }  
+        
         
         body {
             display: flex;
@@ -30,7 +36,7 @@
             color: #333;
         }
         
-        /* Sidebar Styles - Updated to match first template */
+        /* Sidebar Styles */
         .sidebar {
             width: var(--sidebar-width);
             background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary-color) 100%);
@@ -69,14 +75,9 @@
         
         .sidebar-nav {
             padding: 20px 0;
-            list-style: none;
         }
         
         .nav-item {
-            margin-bottom: 5px;
-        }
-        
-        .nav-link {
             display: flex;
             align-items: center;
             padding: 15px 25px;
@@ -84,23 +85,21 @@
             text-decoration: none;
             transition: all 0.3s;
             border-left: 4px solid transparent;
-            cursor: pointer;
         }
         
-        .nav-link:hover, .nav-link.active {
+        .nav-item:hover, .nav-item.active {
             background-color: rgba(255, 255, 255, 0.1);
             color: white;
             border-left-color: var(--secondary-color);
         }
         
-        .nav-icon {
+        .nav-item i {
             width: 25px;
             font-size: 1.2rem;
             margin-right: 15px;
-            text-align: center;
         }
         
-        .nav-text {
+        .nav-label {
             font-weight: 500;
         }
         
@@ -120,10 +119,7 @@
             margin-left: var(--sidebar-width);
             transition: all 0.3s;
             min-height: 100vh;
-        }
-        
-        main {
-            padding: 30px;
+            background-color: #f5f7fa;
         }
         
         /* Header Styles */
@@ -170,7 +166,13 @@
             font-weight: bold;
         }
         
-        /* Content Area */
+        /* Main content area */
+        main {
+            padding: 30px;
+            min-height: calc(100vh - var(--header-height));
+            background-color: #f5f7fa;
+        }
+        
         .content {
             margin-top: 20px;
             padding: 25px;
@@ -188,6 +190,10 @@
             .content {
                 padding: 20px;
             }
+            
+            main {
+                padding: 20px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -196,7 +202,7 @@
                 overflow: hidden;
             }
             
-            .sidebar-header h3, .sidebar-title p, .nav-text, .sidebar-footer {
+            .sidebar-header h3, .sidebar-title p, .nav-label, .sidebar-footer {
                 display: none;
             }
             
@@ -205,12 +211,12 @@
                 padding: 20px 10px;
             }
             
-            .nav-link {
+            .nav-item {
                 justify-content: center;
                 padding: 15px;
             }
             
-            .nav-icon {
+            .nav-item i {
                 margin-right: 0;
                 font-size: 1.5rem;
             }
@@ -221,6 +227,10 @@
             
             .header-left h1 {
                 font-size: 1.5rem;
+            }
+            
+            main {
+                padding: 15px;
             }
         }
         
@@ -245,6 +255,12 @@
                 display: none;
             }
         }
+        
+        /* Active state management */
+        .active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left-color: var(--secondary-color);
+        }
     </style>
 </head>
 <body>
@@ -257,39 +273,29 @@
                 <p>Employee Dashboard</p>
             </div>
         </div>
-        
-        <ul class="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" id="overview-link" data-tab="overview">
-                    <span class="nav-icon"><i class="fas fa-tachometer-alt"></i></span>
-                    <span class="nav-text">Overview Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="leave-link" data-tab="leave-applications">
-                    <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
-                    <span class="nav-text">Leave Applications</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="cto-link" data-tab="cto-applications">
-                    <span class="nav-icon"><i class="fas fa-business-time"></i></span>
-                    <span class="nav-text">CTO Applications</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="calendar-link" data-tab="calendar">
-                    <span class="nav-icon"><i class="fas fa-calendar-alt"></i></span>
-                    <span class="nav-text">Calendar</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="settings-link" data-tab="settings">
-                    <span class="nav-icon"><i class="fas fa-cog"></i></span>
-                    <span class="nav-text">Settings</span>
-                </a>
-            </li>
-        </ul>
+
+        <nav class="sidebar-nav">
+            <a href="{{ route('user.dashboard') }}" class="nav-item {{ Request::routeIs('user.dashboard') ? 'active' : '' }}" data-tab="overview">
+                <i class="fas fa-tachometer-alt"></i>
+                <span class="nav-label">Overview Dashboard</span>
+            </a>
+            <a href="#employees" class="nav-item" data-tab="employees">
+                <i class="fas fa-users"></i>
+                <span class="nav-label">Employees</span>
+            </a>
+            <a href="{{ route('user.leave-form') }}" class="nav-item {{ Request::routeIs('user.leave-form') ? 'active' : '' }}" data-tab="leave-applications">
+                <i class="fas fa-clipboard-list"></i>
+                <span class="nav-label">Leave Applications</span>
+            </a>
+            <a href="{{ route('user.cto-form') }}" class="nav-item {{ Request::routeIs('user.cto-form') ? 'active' : '' }}" data-tab="cto-applications">
+                <i class="fas fa-business-time"></i>
+                <span class="nav-label">CTO Applications</span>
+            </a>
+            <a href="#calendar" class="nav-item" data-tab="calendar">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="nav-label">Calendar</span>
+            </a>
+        </nav>
         
         <div class="sidebar-footer">
             <p>DILG Pangasinan ELMS v2.1</p>
@@ -297,56 +303,50 @@
     </aside>
 
     <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Employee Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-profile">
+                    <div class="user-avatar">JD</div>
+                    <div class="user-info">
+                        <div class="user-name">Juan Dela Cruz</div>
+                        <div class="user-role">Employee</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
         <main>
             {{ $slot }}
         </main>
     </div>
 
     <script>
-        // Tab switching functionality
+        // Add active class to clicked nav items
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
+            const navItems = document.querySelectorAll('.nav-item');
             
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    navItems.forEach(nav => nav.classList.remove('active'));
                     
-                    // Remove active class from all links
-                    navLinks.forEach(item => item.classList.remove('active'));
-                    
-                    // Add active class to clicked link
+                    // Add active class to clicked item
                     this.classList.add('active');
-                    
-                    // Get the tab to show
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Here you would typically load the content for the selected tab
-                    console.log(`Switching to tab: ${tabId}`);
-                    
-                    // Update page title
-                    const pageTitle = document.querySelector('.header-left h1');
-                    const tabText = this.querySelector('.nav-text').textContent;
-                    pageTitle.textContent = tabText;
                 });
             });
             
-            // Responsive sidebar toggle for mobile
-            function handleResize() {
-                const sidebar = document.querySelector('.sidebar');
-                const mainContent = document.querySelector('.main-content');
-                
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.add('collapsed');
-                } else {
-                    sidebar.classList.remove('collapsed');
+            // Highlight current page based on URL
+            const currentPath = window.location.pathname;
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href && currentPath.includes(href.replace(route('user.'), ''))) {
+                    item.classList.add('active');
                 }
-            }
-            
-            // Initial check
-            handleResize();
-            
-            // Listen for resize events
-            window.addEventListener('resize', handleResize);
+            });
         });
     </script>
 </body>

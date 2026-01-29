@@ -6,6 +6,31 @@
     <title>DILG ELMS - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #0d4d9e;
+            --secondary-color: #e63946;
+            --accent-color: #2a9d8f;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --gray-color: #6c757d;
+            --sidebar-width: 250px;
+        }
+        
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+        }
+        
+        
 /* Sidebar Styles */
         .sidebar {
             width: var(--sidebar-width);
