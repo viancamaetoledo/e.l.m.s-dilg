@@ -43,6 +43,13 @@ body {
     height: 100vh;
     z-index: 100;
 }
+.sidebar-header {
+            padding: 25px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
 .logo-section {
     padding: 0 25px 30px;
@@ -191,6 +198,7 @@ body {
     align-items: center;
     gap: 10px;
     padding: 0 30px;
+    padding-bottom: 10px;
 }
 
 .user-avatar {
