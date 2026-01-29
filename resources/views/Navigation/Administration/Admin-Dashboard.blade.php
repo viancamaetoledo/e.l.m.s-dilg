@@ -408,51 +408,6 @@
                         </table>
                     </div>
                 </div>
-                
-                <!-- Leave Balance Summary -->
-                <div class="dashboard-grid">
-                    <div class="dashboard-card">
-                        <div class="card-header">
-                            <h3>Leave Balance Summary</h3>
-                        </div>
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Leave Type</th>
-                                    <th>Total Credits</th>
-                                    <th>Used</th>
-                                    <th>Available</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Vacation Leave</td>
-                                    <td>15</td>
-                                    <td>7.5</td>
-                                    <td>7.5</td>
-                                </tr>
-                                <tr>
-                                    <td>Sick Leave</td>
-                                    <td>15</td>
-                                    <td>3.0</td>
-                                    <td>12.0</td>
-                                </tr>
-                                <tr>
-                                    <td>Emergency Leave</td>
-                                    <td>5</td>
-                                    <td>2.0</td>
-                                    <td>3.0</td>
-                                </tr>
-                                <tr>
-                                    <td>Maternity Leave</td>
-                                    <td>105</td>
-                                    <td>0</td>
-                                    <td>105</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

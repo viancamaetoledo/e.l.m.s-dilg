@@ -32,7 +32,7 @@ class NavigationController extends Controller
 
     public function goEmployeeInfoCredit()
     {
-        return view('Navigation/Administration/Employee-Info-Credit');
+        return view('Navigation/Administration/Employee/Employee-Info-Credit');
     }
 
     public function goAdminLeaveRecord()
@@ -52,5 +52,14 @@ class NavigationController extends Controller
         return view('Navigation/Administration/Admin-Settings');
 
     }
+
+
+    public function goShowEmployeeLeaveCard()
+        {
+            return view('Navigation/Administration/Employee/Employee-Show-Credit');
+
+        }
+
+
 
 }
