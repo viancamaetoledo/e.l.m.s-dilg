@@ -11,7 +11,7 @@
    <!-- Sidebar Navigation -->
         <nav class="sidebar">
             <div class="sidebar-header">
-                <img src= "">
+                <img src=" " alt="DILG Logo" class="sidebar-logo">
                 <div class="sidebar-title">
                     <h3>DILG ELMS</h3>
                     <p>Employee Dashboard</p>
@@ -21,9 +21,6 @@
             <ul class="nav-menu">
                 <li><a href="{{ route('user.dashboard') }}"  class="nav-item" data-tab="overview">
                     <i class="fas fa-tachometer-alt"></i> <span>Overview Dashboard</span>
-                </a></li>
-                <li><a href="#" class="nav-item" data-tab="employees">
-                    <i class="fas fa-users"></i> <span>Employees</span>
                 </a></li>
                 <li><a href="{{ route('user.leave-form') }}" class="nav-item" data-tab="leave-applications">
                     <i class="fas fa-clipboard-list"></i> <span>Leave Applications</span>
@@ -37,6 +34,7 @@
                     <i class="fas fa-calendar-alt"></i> <span>Calendar</span>
                 </a></li>
             </ul>
+            
 
             <div class="user-profile">
                         <div class="user-avatar">AD</div>

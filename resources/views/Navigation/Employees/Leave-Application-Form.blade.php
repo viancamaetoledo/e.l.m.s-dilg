@@ -131,6 +131,72 @@ textarea.form-control {
     border-color: #dee2e6;
 }
 
+/* Leave Details Sections */
+.leave-details-section {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    display: none;
+}
+
+.leave-details-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.details-group {
+    margin-bottom: 15px;
+}
+
+.details-group:last-child {
+    margin-bottom: 0;
+}
+
+.details-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--dark-color);
+    font-size: 0.9rem;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.checkbox-item input[type="radio"] {
+    width: 18px;
+    height: 18px;
+}
+
+.checkbox-item label {
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+/* Other leave type textbox */
+.other-leave-type {
+    margin-top: 10px;
+    display: none;
+}
+
 /* Footer */
 .footer {
     text-align: center;
@@ -159,6 +225,11 @@ textarea.form-control {
     .cto-form-header h3 {
         font-size: 1.1rem;
     }
+    
+    .checkbox-group {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 </style>
 
@@ -175,7 +246,7 @@ textarea.form-control {
             <div class="form-row">
                 <div class="form-group">
                     <label for="leave-type">Type of Leave</label>
-                    <select id="leave-type" class="form-control" required>
+                    <select id="leave-type" class="form-control" required onchange="handleLeaveTypeChange()">
                         <option value="">Select Leave Type</option>
                         <option value="Vacation Leave">Vacation Leave</option>
                         <option value="Mandatory/Forced Leave">Mandatory/Forced Leave</option>
@@ -192,7 +263,12 @@ textarea.form-control {
                         <option value="Monetization of Leave Credits">Monetization of Leave Credits</option>
                         <option value="Terminal Leave">Terminal Leave</option>
                         <option value="Adoption Leave">Adoption Leave</option>
+                        <option value="Others">Others</option>
                     </select>
+                    <div class="other-leave-type" id="other-leave-type">
+                        <label for="other-leave-specify">Please specify:</label>
+                        <input type="text" id="other-leave-specify" class="form-control" placeholder="Specify other leave type">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="employee-name">Employee Name</label>
@@ -217,6 +293,94 @@ textarea.form-control {
                 </div>
             </div>
             
+            <!-- Vacation/Special Privilege Leave Details -->
+            <div class="leave-details-section" id="vacation-details">
+                <h4>Details of Vacation/Special Privilege Leave</h4>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="vacation-local" name="vacation-type" value="local">
+                        <label for="vacation-local">Within the Philippines</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="vacation-abroad" name="vacation-type" value="abroad">
+                        <label for="vacation-abroad">Abroad</label>
+                    </div>
+                </div>
+                <div class="details-group" id="abroad-specify" style="margin-top: 10px; display: none;">
+                    <label for="abroad-destination">Specify destination:</label>
+                    <input type="text" id="abroad-destination" class="form-control" placeholder="Enter destination country">
+                </div>
+            </div>
+            
+            <!-- Sick Leave Details -->
+            <div class="leave-details-section" id="sick-leave-details">
+                <h4>Details of Sick Leave</h4>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="radio" id="sick-hospital" name="sick-type" value="hospital">
+                        <label for="sick-hospital">In Hospital</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="sick-outpatient" name="sick-type" value="outpatient">
+                        <label for="sick-outpatient">Out Patient</label>
+                    </div>
+                </div>
+                <div class="details-group" style="margin-top: 10px;">
+                    <label for="illness-specify">Specify Illness:</label>
+                    <input type="text" id="illness-specify" class="form-control" placeholder="Specify illness">
+                </div>
+            </div>
+            
+            <!-- Special Leave Benefits for Women Details -->
+            <div class="leave-details-section" id="women-leave-details">
+                <h4>Details of Special Leave Benefits for Women</h4>
+                <div class="details-group">
+                    <label for="women-illness-specify">Specify Illness:</label>
+                    <input type="text" id="women-illness-specify" class="form-control" placeholder="Specify illness for special leave benefits for women">
+                </div>
+            </div>
+            
+            <!-- Study Leave Details -->
+            <div class="leave-details-section" id="study-leave-details">
+                <h4>Details of Study Leave</h4>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="study-masters" name="study-purpose">
+                        <label for="study-masters">Completion of Master's Degree</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="study-bar" name="study-purpose">
+                        <label for="study-bar">BAR/Board Examination Review</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="study-other" name="study-purpose">
+                        <label for="study-other">Other purpose</label>
+                    </div>
+                </div>
+                <div class="details-group" style="margin-top: 10px;">
+                    <label for="study-other-specify">Specify other purpose:</label>
+                    <input type="text" id="study-other-specify" class="form-control" placeholder="Specify other study purpose">
+                </div>
+            </div>
+            
+            <!-- Monetization Leave Details -->
+            <div class="leave-details-section" id="monetization-details">
+                <h4>Monetization of Leave Credits</h4>
+                <div class="details-group">
+                    <label for="monetization-amount">Amount of Leave Credits to Monetize (in days):</label>
+                    <input type="number" id="monetization-amount" class="form-control" min="1" max="30" placeholder="Enter number of days">
+                </div>
+            </div>
+            
+            <!-- Terminal Leave Details -->
+            <div class="leave-details-section" id="terminal-leave-details">
+                <h4>Terminal Leave Details</h4>
+                <div class="details-group">
+                    <label for="terminal-reason">Reason for Terminal Leave:</label>
+                    <textarea id="terminal-reason" class="form-control" rows="3" placeholder="Provide reason for terminal leave"></textarea>
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label for="reason">Reason for Leave</label>
                 <textarea id="reason" class="form-control" rows="4" placeholder="Please provide a reason for your leave..." required></textarea>
@@ -236,12 +400,74 @@ textarea.form-control {
     </footer>
 
     <script>
+    function handleLeaveTypeChange() {
+        const leaveType = document.getElementById('leave-type').value;
+        const otherLeaveTypeDiv = document.getElementById('other-leave-type');
+        
+        // Show/hide other leave type textbox
+        if (leaveType === 'Others') {
+            otherLeaveTypeDiv.style.display = 'block';
+        } else {
+            otherLeaveTypeDiv.style.display = 'none';
+        }
+        
+        // Hide all details sections first
+        const detailsSections = document.querySelectorAll('.leave-details-section');
+        detailsSections.forEach(section => {
+            section.style.display = 'none';
+        });
+        
+        // Show relevant details section based on leave type
+        switch(leaveType) {
+            case 'Vacation Leave':
+            case 'Special Privilege Leave':
+                document.getElementById('vacation-details').style.display = 'block';
+                break;
+            case 'Sick Leave':
+                document.getElementById('sick-leave-details').style.display = 'block';
+                break;
+            case 'Special Leave Benefits for Women':
+                document.getElementById('women-leave-details').style.display = 'block';
+                break;
+            case 'Study Leave':
+                document.getElementById('study-leave-details').style.display = 'block';
+                break;
+            case 'Monetization of Leave Credits':
+                document.getElementById('monetization-details').style.display = 'block';
+                break;
+            case 'Terminal Leave':
+                document.getElementById('terminal-leave-details').style.display = 'block';
+                break;
+        }
+        
+        // Clear all radio buttons and checkboxes
+        clearDetailsInputs();
+    }
+    
+    function clearDetailsInputs() {
+        // Clear all radio buttons
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => radio.checked = false);
+        
+        // Clear all checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+        
+        // Clear all text inputs in details sections
+        const detailInputs = document.querySelectorAll('.leave-details-section input, .leave-details-section textarea');
+        detailInputs.forEach(input => input.value = '');
+        
+        // Hide abroad destination field
+        document.getElementById('abroad-specify').style.display = 'none';
+    }
+    
     function handleLeaveSubmit(event) {
         event.preventDefault();
         
         // Get form values
+        const leaveType = document.getElementById('leave-type').value;
         const formData = {
-            leaveType: document.getElementById('leave-type').value,
+            leaveType: leaveType,
             employeeName: document.getElementById('employee-name').value,
             startDate: document.getElementById('start-date').value,
             endDate: document.getElementById('end-date').value,
@@ -249,6 +475,92 @@ textarea.form-control {
             reason: document.getElementById('reason').value,
             contactInfo: document.getElementById('contact-during-leave').value
         };
+        
+        // Add other leave type if selected
+        if (leaveType === 'Others') {
+            formData.otherLeaveType = document.getElementById('other-leave-specify').value;
+            if (!formData.otherLeaveType) {
+                alert('Please specify the other leave type.');
+                return;
+            }
+        }
+        
+        // Add details based on leave type
+        switch(leaveType) {
+            case 'Vacation Leave':
+            case 'Special Privilege Leave':
+                const vacationType = document.querySelector('input[name="vacation-type"]:checked');
+                if (vacationType) {
+                    formData.vacationType = vacationType.value;
+                    if (vacationType.value === 'abroad') {
+                        formData.destination = document.getElementById('abroad-destination').value;
+                        if (!formData.destination) {
+                            alert('Please specify destination for abroad leave.');
+                            return;
+                        }
+                    }
+                }
+                break;
+                
+            case 'Sick Leave':
+                const sickType = document.querySelector('input[name="sick-type"]:checked');
+                if (sickType) {
+                    formData.sickType = sickType.value;
+                }
+                formData.illness = document.getElementById('illness-specify').value;
+                if (!formData.illness) {
+                    alert('Please specify the illness.');
+                    return;
+                }
+                break;
+                
+            case 'Special Leave Benefits for Women':
+                formData.womenIllness = document.getElementById('women-illness-specify').value;
+                if (!formData.womenIllness) {
+                    alert('Please specify the illness for special leave benefits for women.');
+                    return;
+                }
+                break;
+                
+            case 'Study Leave':
+                const studyPurposes = [];
+                const studyCheckboxes = document.querySelectorAll('input[name="study-purpose"]:checked');
+                studyCheckboxes.forEach(checkbox => {
+                    studyPurposes.push(checkbox.id.replace('study-', ''));
+                });
+                
+                if (studyPurposes.length === 0) {
+                    alert('Please select at least one study purpose.');
+                    return;
+                }
+                
+                formData.studyPurposes = studyPurposes;
+                
+                if (studyPurposes.includes('other')) {
+                    formData.studyOtherPurpose = document.getElementById('study-other-specify').value;
+                    if (!formData.studyOtherPurpose) {
+                        alert('Please specify the other study purpose.');
+                        return;
+                    }
+                }
+                break;
+                
+            case 'Monetization of Leave Credits':
+                formData.monetizationDays = document.getElementById('monetization-amount').value;
+                if (!formData.monetizationDays) {
+                    alert('Please specify the number of days to monetize.');
+                    return;
+                }
+                break;
+                
+            case 'Terminal Leave':
+                formData.terminalReason = document.getElementById('terminal-reason').value;
+                if (!formData.terminalReason) {
+                    alert('Please provide a reason for terminal leave.');
+                    return;
+                }
+                break;
+        }
         
         // Validate dates
         const startDate = new Date(formData.startDate);
@@ -279,9 +591,6 @@ textarea.form-control {
         
         // Show success message
         alert('Leave application submitted successfully!');
-        
-        // Reset form (optional)
-        // event.target.reset();
     }
     
     // Set default dates
@@ -341,6 +650,25 @@ textarea.form-control {
             } else {
                 warning.style.display = 'none';
             }
+        });
+        
+        // Show abroad destination field when abroad is selected
+        document.getElementById('vacation-abroad').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('abroad-specify').style.display = 'block';
+            }
+        });
+        
+        document.getElementById('vacation-local').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('abroad-specify').style.display = 'none';
+            }
+        });
+        
+        // Handle study other checkbox
+        document.getElementById('study-other').addEventListener('change', function() {
+            const studyOtherInput = document.getElementById('study-other-specify');
+            studyOtherInput.required = this.checked;
         });
     });
     </script>

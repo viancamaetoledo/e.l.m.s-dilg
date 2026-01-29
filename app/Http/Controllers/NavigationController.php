@@ -29,4 +29,28 @@ class NavigationController extends Controller
     {
         return view('Navigation/Employees/CTO-Application');
     }
+
+    public function goEmployeeInfoCredit()
+    {
+        return view('Navigation/Administration/Employee-Info-Credit');
+    }
+
+    public function goAdminLeaveRecord()
+    {
+        return view('Navigation/Administration/Admin-Leave-Application');
+    }
+    public function goAdminCTORecord()
+    {
+        return view('Navigation/Administration/Admin-CTO-Application');
+    }
+    public function goAdminReports()
+    {
+        return view('Navigation/Administration/Admin-Reports');
+    }
+    public function goAdminSettings()
+    {
+        return view('Navigation/Administration/Admin-Settings');
+
+    }
+
 }
