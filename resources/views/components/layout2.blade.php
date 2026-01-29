@@ -303,21 +303,6 @@
     </aside>
 
     <div class="main-content">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-left">
-                <h1>Employee Dashboard</h1>
-            </div>
-            <div class="header-right">
-                <div class="user-profile">
-                    <div class="user-avatar">JD</div>
-                    <div class="user-info">
-                        <div class="user-name">Juan Dela Cruz</div>
-                        <div class="user-role">Employee</div>
-                    </div>
-                </div>
-            </div>
-        </header>
         
         <main>
             {{ $slot }}
