@@ -373,6 +373,7 @@
                         </table>
                     </div>
                 </div>
+<<<<<<< HEAD
                 
                 <!-- Leave Applications Tab -->
                 <div id="leave-applications" class="tab-content">
@@ -626,6 +627,8 @@
                     </div>
                 </div>
                 
+=======
+>>>>>>> e39fd0a (info-credit)
             </div>
         </div>
     </div>

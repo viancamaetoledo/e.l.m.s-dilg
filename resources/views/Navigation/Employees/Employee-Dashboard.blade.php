@@ -1,499 +1,135 @@
-<x-layout2>
-    <title>DILG ELMS - Admin Dashboard</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DILG ELMS - Employee Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        :root {
-            --primary-color: #0d4d9e;
-            --secondary-color: #e63946;
-            --accent-color: #2a9d8f;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --gray-color: #6c757d;
-            --sidebar-width: 250px;
-        }
-        
-        body {
-            display: flex;
-            min-height: 100vh;
-            background-color: #f5f7fa;
-            color: var(--dark-color);
-        }
-        
-        
-        
-        /* Main Content Styles */
-        .main-content {
-            flex: 1;
-            margin-left: var(--sidebar-width);
-            padding: 20px;
-            width: calc(100% - var(--sidebar-width));
-        }
-        
-        .header {
-            height: var(--header-height);
-            background: white;
-            padding: 0 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 99;
-        }
-        
-        .header-title h1 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-        }
-        
-        .header-title p {
-            color: var(--gray-color);
-        }
-        
-        .user-profile {
-            display: flex;
-            align-items: center;
-            background-color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        .user-info h4 {
-            font-size: 0.9rem;
-        }
-        
-        .user-info p {
-            font-size: 0.8rem;
-            color: var(--gray-color);
-        }
-        
-        /* Dashboard Cards */
-        .dashboard-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .card-1 .card-icon { background-color: #2a9d8f; }
-        .card-2 .card-icon { background-color: #e9c46a; }
-        .card-3 .card-icon { background-color: #e76f51; }
-        .card-4 .card-icon { background-color: #264653; }
-        
-        .card h3 {
-            font-size: 2rem;
-            margin-bottom: 5px;
-            color: var(--dark-color);
-        }
-        
-        .card p {
-            color: var(--gray-color);
-            font-size: 0.9rem;
-        }
-        
-        /* Two Column Layout */
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        @media (max-width: 992px) {
-            .two-column {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Leave Balance Table */
-        .leave-balance-container, .recent-activities-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            height: 100%;
-        }
-        
-        .section-title {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .section-title h2 {
-            font-size: 1.5rem;
-        }
-        
-        .table-responsive {
-            overflow-x: auto;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        thead {
-            background-color: #f8f9fa;
-        }
-        
-        th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--dark-color);
-            border-bottom: 2px solid #dee2e6;
-        }
-        
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #dee2e6;
-        }
-        
-        tr:hover {
-            background-color: #f8f9fa;
-        }
-        
-        .leave-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .available {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        
-        .low {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        
-        .used {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-        
-        /* Recent Activities */
-        .activity-list {
-            list-style: none;
-        }
-        
-        .activity-item {
-            display: flex;
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .activity-item:last-child {
-            border-bottom: none;
-        }
-        
-        .activity-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #e9f7fe;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: var(--primary-color);
-            flex-shrink: 0;
-        }
-        
-        .activity-content h4 {
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
-        
-        .activity-content p {
-            font-size: 0.9rem;
-            color: var(--gray-color);
-            margin-bottom: 5px;
-        }
-        
-        .activity-time {
-            font-size: 0.8rem;
-            color: var(--gray-color);
-        }
-        
-        /* Form Container */
-        .form-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-            display: none;
-        }
-        
-        .form-container.active {
-            display: block;
-        }
-        
-        /* CTO Form Specific Styles */
-        .cto-form-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #dee2e6;
-        }
-        
-        .cto-form-header h2 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-        
-        .cto-form-header h3 {
-            color: var(--dark-color);
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-        
-        .form-section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-        }
-        
-        .form-section-title {
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #dee2e6;
-        }
-        
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 15px;
-        }
-        
-        .form-group {
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--dark-color);
-            font-size: 0.9rem;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(13, 77, 158, 0.1);
-        }
-        
-        .signature-line {
-            border-top: 1px solid #333;
-            width: 200px;
-            margin-top: 5px;
-            text-align: center;
-            padding-top: 5px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-        
-        .table-form {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        
-        .table-form th, .table-form td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-        
-        .table-form th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-        }
-        
-        .btn-submit {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: block;
-            margin: 30px auto 0;
-        }
-        
-        .btn-submit:hover {
-            background-color: #0a3d7a;
-        }
-        
-        .notes-box {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .notes-box h4 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #dee2e6;
-            color: var(--gray-color);
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .sidebar {
-                width: 70px;
-                padding: 20px 0;
-            }
-            
-            .logo-text, .logo-subtext, .nav-text, .leave-item a {
-                display: none;
-            }
-            
-            .logo-container {
-                justify-content: center;
-                padding: 0 0 20px;
-            }
-            
-            .logo {
-                margin-right: 0;
-            }
-            
-            .nav-link {
-                justify-content: center;
-                padding: 15px 0;
-            }
-            
-            .nav-icon {
-                margin-right: 0;
-                font-size: 1.2rem;
-            }
-            
-            .main-content {
-                margin-left: 70px;
-                width: calc(100% - 70px);
-            }
-            
-            .leave-item {
-                padding: 12px 0;
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .dashboard-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .user-profile {
-                margin-top: 15px;
-            }
-            
-            .table-responsive {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/Employees/EmployeeDashboard.css">
 </head>
 <body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="logo-text">
+                <h2>DILG ELMS</h2>
+                <p class="logo-subtext">Employee Portal</p>
+            </div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li>
+                <a href="#" class="nav-link active" id="overview-link">
+                    <i class="fas fa-tachometer-alt nav-icon"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </li>
+            
+            <li class="nav-dropdown">
+                <a href="#" class="nav-link" id="leave-link">
+                    <i class="fas fa-calendar-plus nav-icon"></i>
+                    <span class="nav-text">Apply Leave</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu" id="leave-dropdown">
+                    <li class="leave-item">
+                        <a href="#" data-leave="vl">Vacation Leave (VL)</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="mfl">Mandatory/Forced Leave (MFL)</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="sl">Sick Leave (SL)</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="ml">Maternity Leave (ML)</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="pl">Paternity Leave (PL)</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="spl">Special Privilege Leave (SPL)</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="solo">Solo Parent Leave</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="study">Study Leave</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="vawc">VAWC Leave</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="rehab">Rehabilitation Leave</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="slbw">Special Leave Benefits for Women</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="calamity">Special Emergency (Calamity) Leave</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="monetization">Monetization of Leave Credits</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="terminal">Terminal Leave</a>
+                    </li>
+                    <li class="leave-item">
+                        <a href="#" data-leave="adoption">Adoption Leave</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="#" class="nav-link" id="cto-link">
+                    <i class="fas fa-clock nav-icon"></i>
+                    <span class="nav-text">Apply CTO</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-history nav-icon"></i>
+                    <span class="nav-text">Leave History</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-calendar-alt nav-icon"></i>
+                    <span class="nav-text">Calendar</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span class="nav-text">Profile</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog nav-icon"></i>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="#" class="nav-link logout-link">
+                    <i class="fas fa-sign-out-alt nav-icon"></i>
+                    <span class="nav-text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     
     <!-- Main Content -->
+    <main class="main-content">
         <header class="header">
             <div class="header-title">
                 <h1>Employee Dashboard</h1>
@@ -756,7 +392,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="cto-name">Name</label>
-                            <input type="text" id="cto-name" class="form-control"required>
+                            <input type="text" id="cto-name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="cto-position">Position</label>
@@ -793,258 +429,8 @@
         <footer class="footer">
             <p>DILG Pangasinan Employee Dashboard &copy; 2026 | Department of the Interior and Local Government - Region I</p>
         </footer>
+    </main>
 
-    <script>
-        // Toggle leave dropdown
-        document.getElementById('leave-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            const dropdown = document.getElementById('leave-dropdown');
-            dropdown.classList.toggle('show');
-            
-            // Toggle chevron icon
-            const chevron = this.querySelector('.fa-chevron-down');
-            if (chevron.classList.contains('fa-chevron-down')) {
-                chevron.classList.remove('fa-chevron-down');
-                chevron.classList.add('fa-chevron-up');
-            } else {
-                chevron.classList.remove('fa-chevron-up');
-                chevron.classList.add('fa-chevron-down');
-            }
-        });
-        
-        // Navigation functionality
-        const navLinks = document.querySelectorAll('.nav-link');
-        const formContainers = document.querySelectorAll('.form-container');
-        const dashboardOverview = document.getElementById('dashboard-overview');
-        const twoColumnSection = document.querySelector('.two-column');
-        
-        function showSection(sectionId) {
-            // Hide all form containers
-            formContainers.forEach(container => {
-                container.classList.remove('active');
-            });
-            
-            // Show/hide dashboard sections
-            if (sectionId === 'overview') {
-                dashboardOverview.style.display = 'block';
-                twoColumnSection.style.display = 'grid';
-            } else {
-                dashboardOverview.style.display = 'none';
-                twoColumnSection.style.display = 'none';
-            }
-            
-            // Update active nav link
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Show the selected form if applicable
-            if (sectionId === 'leave') {
-                document.getElementById('leave-form-container').classList.add('active');
-                document.getElementById('leave-link').classList.add('active');
-            } else if (sectionId === 'cto') {
-                document.getElementById('cto-form-container').classList.add('active');
-                document.getElementById('cto-link').classList.add('active');
-            } else {
-                document.getElementById('overview-link').classList.add('active');
-            }
-        }
-        
-        // Set up navigation event listeners
-        document.getElementById('overview-link').addEventListener('click', function() {
-            showSection('overview');
-        });
-
-        document.getElementById('leave-link').addEventListener('click', function() {
-            showSection('leave');
-        });
-        
-        document.getElementById('cto-link').addEventListener('click', function() {
-            showSection('cto');
-        });
-        
-        // Handle leave type selection from sidebar
-        const leaveItems = document.querySelectorAll('.leave-item a');
-        const leaveTypeSelect = document.getElementById('leave-type');
-        
-        leaveItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const leaveType = this.getAttribute('data-leave');
-                
-                // Map short codes to full leave type names
-                const leaveTypeMap = {
-                    'vl': 'Vacation Leave',
-                    'mfl': 'Mandatory/Forced Leave',
-                    'sl': 'Sick Leave',
-                    'ml': 'Maternity Leave',
-                    'pl': 'Paternity Leave',
-                    'spl': 'Special Privilege Leave',
-                    'solo': 'Solo Parent Leave',
-                    'study': 'Study Leave',
-                    'vawc': 'VAWC Leave',
-                    'rehab': 'Rehabilitation Leave',
-                    'slbw': 'Special Leave Benefits for Women',
-                    'calamity': 'Special Emergency (Calamity) Leave',
-                    'monetization': 'Monetization of Leave Credits',
-                    'terminal': 'Terminal Leave',
-                    'adoption': 'Adoption Leave'
-                };
-                
-                const fullLeaveType = leaveTypeMap[leaveType];
-                leaveTypeSelect.value = fullLeaveType;
-                
-                // Show leave form
-                showSection('leave');
-                
-                // Close dropdown on mobile
-                if (window.innerWidth <= 992) {
-                    document.getElementById('leave-dropdown').classList.remove('show');
-                    const chevron = document.querySelector('#leave-link .fa-chevron-up');
-                    if (chevron) {
-                        chevron.classList.remove('fa-chevron-up');
-                        chevron.classList.add('fa-chevron-down');
-                    }
-                }
-            });
-        });
-        
-        // Handle leave form submission
-        document.getElementById('leave-application-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const leaveType = document.getElementById('leave-type').value;
-            const startDate = document.getElementById('start-date').value;
-            const endDate = document.getElementById('end-date').value;
-            const numberOfDays = document.getElementById('number-of-days').value;
-            const reason = document.getElementById('reason').value;
-            
-            if (!leaveType || !startDate || !endDate || !numberOfDays || !reason) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // In a real application, you would send this data to a server
-            alert(`Leave application submitted successfully!\n\nLeave Type: ${leaveType}\nStart Date: ${startDate}\nEnd Date: ${endDate}\nNumber of Days: ${numberOfDays}\n\nYour application is now pending approval.`);
-            
-            // Reset form
-            this.reset();
-            document.getElementById('employee-name').value = 'Juan Dela Cruz';
-            
-            // Return to overview
-            showSection('overview');
-        });
-        
-        // Handle CTO form submission
-        document.getElementById('cto-application-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const hoursApplied = document.getElementById('cto-hours-applied').value;
-            const inclusiveDates = document.getElementById('cto-inclusive-dates').value;
-            const filingDate = document.getElementById('cto-filing-date').value;
-            
-            if (!hoursApplied || !inclusiveDates || !filingDate) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            const action = document.querySelector('input[name="action"]:checked').value;
-            
-            if (action === 'disapproved' && !document.getElementById('disapproval-reason').value) {
-                alert('Please provide a reason for disapproval.');
-                return;
-            }
-            
-            // In a real application, you would send this data to a server
-            alert(`CTO application submitted successfully!\n\nHours Applied: ${hoursApplied}\nInclusive Dates: ${inclusiveDates}\nFiling Date: ${filingDate}\n\nYour application has been submitted for processing.`);
-            
-            // Return to overview
-            showSection('overview');
-        });
-        
-        // Calculate number of days based on start and end dates for leave form
-        const startDateInput = document.getElementById('start-date');
-        const endDateInput = document.getElementById('end-date');
-        const numberOfDaysInput = document.getElementById('number-of-days');
-        
-        function calculateDays() {
-            if (startDateInput.value && endDateInput.value) {
-                const start = new Date(startDateInput.value);
-                const end = new Date(endDateInput.value);
-                
-                // Calculate difference in days
-                const timeDiff = end.getTime() - start.getTime();
-                const dayDiff = timeDiff / (1000 * 3600 * 24) + 1; // +1 to include both start and end days
-                
-                if (dayDiff > 0) {
-                    numberOfDaysInput.value = dayDiff;
-                } else {
-                    numberOfDaysInput.value = '';
-                }
-            }
-        }
-        
-        startDateInput.addEventListener('change', calculateDays);
-        endDateInput.addEventListener('change', calculateDays);
-        
-        // Set minimum date to today for start date
-        const today = new Date().toISOString().split('T')[0];
-        startDateInput.min = today;
-        
-        // Update end date min when start date changes
-        startDateInput.addEventListener('change', function() {
-            endDateInput.min = this.value;
-        });
-        
-        // Initialize CTO form with current date
-        const currentDate = new Date();
-        document.getElementById('cto-filing-date').value = currentDate.toISOString().split('T')[0];
-        document.getElementById('carded-date').value = currentDate.toISOString().split('T')[0];
-        document.getElementById('coc-as-of-date').value = currentDate.toISOString().split('T')[0];
-        
-        // Set CTO hours earned based on table data
-        function calculateCTOHours() {
-            const rows = document.querySelectorAll('.table-form tbody tr');
-            let totalHours = 0;
-            
-            rows.forEach(row => {
-                const hoursEarnedInput = row.querySelector('td:nth-child(2) input');
-                if (hoursEarnedInput && hoursEarnedInput.value) {
-                    totalHours += parseInt(hoursEarnedInput.value) || 0;
-                }
-            });
-            
-            document.getElementById('coc-hours-earned').value = totalHours;
-        }
-        
-        // Calculate initial CTO hours
-        calculateCTOHours();
-        
-        // Update CTO hours when table inputs change
-        const tableInputs = document.querySelectorAll('.table-form input');
-        tableInputs.forEach(input => {
-            input.addEventListener('change', calculateCTOHours);
-        });
-        
-        // Handle disapproval reason field enable/disable
-        const actionRadios = document.querySelectorAll('input[name="action"]');
-        const disapprovalReason = document.getElementById('disapproval-reason');
-        
-        actionRadios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (this.value === 'disapproved') {
-                    disapprovalReason.disabled = false;
-                    document.getElementById('approved-hours').disabled = true;
-                } else {
-                    disapprovalReason.disabled = true;
-                    document.getElementById('approved-hours').disabled = false;
-                }
-            });
-        });
-        
-        // Initialize with overview section
-        showSection('overview');
-    </script>
+    <script src="/js/Employees/EmployeeDashboard.js"></script>
 </body>
 </html>
-</x-layout2>
