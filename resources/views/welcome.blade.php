@@ -586,17 +586,10 @@
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="container">
-            <span><i class="fas fa-phone-alt"></i> (075) 542-6834</span>
-            <span><i class="fas fa-envelope"></i> region1@dilg.gov.ph</span>
-        </div>
-    </div>
-
     <header class="main-header">
         <div class="container header-content">
             <a href="#" class="brand">
-                <img src="/image/dilg-logo.png" alt="DILG Logo" class="brand-logo">
+                <img src="/image/DILG-logo.png" alt="DILG Logo" class="brand-logo">
                 <div class="brand-text">
                     <h1>DILG Pangasinan</h1>
                     <span>Department of the Interior and Local Government</span>
@@ -660,6 +653,8 @@
                     <h5>Quick Links</h5>
                     <ul>
                         <li><a href="#">Official Website</a></li>
+                        <li><a href="{{ route('user.dashboard') }}">employee</a></li>
+                        <li><a href="{{ route('admin.dashboard') }}">admin</a></li>
                     </ul>
                 </div>
                 <div class="footer-info">

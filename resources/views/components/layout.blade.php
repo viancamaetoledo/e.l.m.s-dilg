@@ -12,7 +12,7 @@
         <!-- Sidebar -->
          <nav class="sidebar">
             <div class="sidebar-header">
-                <img src=" " alt="DILG Logo" class="sidebar-logo">  
+                <img src="/image/DILG-logo.png" alt="DILG Logo" class="brand-logo">
                 <div class="sidebar-title">
                     <h3>DILG ELMS</h3>
                     <p>Admin Dashboard</p>
@@ -53,10 +53,10 @@
                         </div>
                     </div>
             
-            <div class="sidebar-footer">
-                <div class="logout-btn">
+            <div class="sidebar-footer">    
+                    <a href="{{ route('welcome.landing') }}">
                     <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-                </div>
+                    </a>
                 <p class="version">v2.1.4</p>
             </div>
         </nav>
