@@ -19,4 +19,13 @@ class NavigationController extends Controller
     {
         return view('welcome');
     }
+
+
+
+    public function goLeaveForm()
+    {
+        return view('Navigation/Employees/Leave-Application-Form');
+    }
+
+
 }

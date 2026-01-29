@@ -173,31 +173,31 @@
             </div>
             
             <nav class="sidebar-nav">
-                <a href="#overview" class="nav-item active" data-tab="overview">
+                <a href="{{route('user.dashboard')}}"  class="nav-item active" data-tab="overview">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="nav-label">Overview Dashboard</span>
                 </a>
-                <a href="#employees" class="nav-item" data-tab="employees">
+                <a href="{{route('user.dashboard')}}" class="nav-item" data-tab="employees">
                     <i class="fas fa-users"></i>
                     <span class="nav-label">Employees</span>
                 </a>
-                <a href="#leave-applications" class="nav-item" data-tab="leave-applications">
+                <a href="{{route('user.leave-form')}}" class="nav-item" data-tab="leave-applications">
                     <i class="fas fa-clipboard-list"></i>
                     <span class="nav-label">Leave Applications</span>
                 </a>
-                <a href="#cto-applications" class="nav-item" data-tab="cto-applications">
+                <a href="{{route('user.dashboard')}}"  class="nav-item" data-tab="cto-applications">
                     <i class="fas fa-business-time"></i>
                     <span class="nav-label">CTO Applications</span>
                 </a>
-                <a href="#calendar" class="nav-item" data-tab="calendar">
+                <a href="{{route('user.dashboard')}}" class="nav-item" data-tab="calendar">
                     <i class="fas fa-calendar-alt"></i>
                     <span class="nav-label">Calendar</span>
                 </a>
-                <a href="#reports" class="nav-item" data-tab="reports">
+                <a href="{{route('user.dashboard')}}" class="nav-item" data-tab="reports">
                     <i class="fas fa-chart-bar"></i>
                     <span class="nav-label">Reports</span>
                 </a>
-                <a href="#settings" class="nav-item" data-tab="settings">
+                <a href="{{route('user.dashboard')}}" class="nav-item" data-tab="settings">
                     <i class="fas fa-cog"></i>
                     <span class="nav-label">Settings</span>
                 </a>
