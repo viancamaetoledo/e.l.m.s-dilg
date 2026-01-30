@@ -1,150 +1,343 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<x-layout2>
     <title>DILG ELMS - Employee Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
-    <link rel="stylesheet" href="/css/Employees/EmployeeDashboard.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+           --primary-color: #1a5276;
+            --primary-dark: #00215E;
+            --secondary-color: #FFC55A;
+            --sidebar-width: 280px;
+            --header-height: 70px;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f5f7fa;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-title h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .header-title p {
+            color: var(--gray-color);
+            font-size: 0.95rem;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .user-info h4 {
+            font-size: 0.9rem;
+        }
+        
+        .user-info p {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            border-top: 4px solid transparent;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .card-1 .card-icon { 
+            background-color: #2a9d8f; 
+            border-top-color: #2a9d8f;
+        }
+        .card-2 .card-icon { 
+            background-color: #e9c46a; 
+            border-top-color: #e9c46a;
+        }
+        .card-3 .card-icon { 
+            background-color: #e76f51; 
+            border-top-color: #e76f51;
+        }
+        .card-4 .card-icon { 
+            background-color: #264653; 
+            border-top-color: #264653;
+        }
+        
+        .card h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .card p {
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Leave Balance Table */
+        .leave-balance-container, .recent-activities-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title h2 {
+            font-size: 1.5rem;
+        }
+        
+        .btn-view-all {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-view-all:hover {
+            background-color: #0a3d7a;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background-color: #f8f9fa;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--dark-color);
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .leave-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .available {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .low {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .used {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Recent Activities */
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e9f7fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+        
+        .activity-content h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .activity-content p {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            margin-bottom: 5px;
+        }
+        
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+            
+            .user-profile {
+                margin-top: 15px;
+                align-self: stretch;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .table-responsive {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar">
-        <div class="logo-container">
-            <div class="logo">
-                <i class="fas fa-building"></i>
-            </div>
-            <div class="logo-text">
-                <h2>DILG ELMS</h2>
-                <p class="logo-subtext">Employee Portal</p>
-            </div>
-        </div>
-        
-        <ul class="nav-menu">
-            <li>
-                <a href="#" class="nav-link active" id="overview-link">
-                    <i class="fas fa-tachometer-alt nav-icon"></i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-            </li>
-            
-            <li class="nav-dropdown">
-                <a href="#" class="nav-link" id="leave-link">
-                    <i class="fas fa-calendar-plus nav-icon"></i>
-                    <span class="nav-text">Apply Leave</span>
-                    <i class="fas fa-chevron-down"></i>
-                </a>
-                <ul class="dropdown-menu" id="leave-dropdown">
-                    <li class="leave-item">
-                        <a href="#" data-leave="vl">Vacation Leave (VL)</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="mfl">Mandatory/Forced Leave (MFL)</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="sl">Sick Leave (SL)</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="ml">Maternity Leave (ML)</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="pl">Paternity Leave (PL)</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="spl">Special Privilege Leave (SPL)</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="solo">Solo Parent Leave</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="study">Study Leave</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="vawc">VAWC Leave</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="rehab">Rehabilitation Leave</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="slbw">Special Leave Benefits for Women</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="calamity">Special Emergency (Calamity) Leave</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="monetization">Monetization of Leave Credits</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="terminal">Terminal Leave</a>
-                    </li>
-                    <li class="leave-item">
-                        <a href="#" data-leave="adoption">Adoption Leave</a>
-                    </li>
-                </ul>
-            </li>
-            
-            <li>
-                <a href="#" class="nav-link" id="cto-link">
-                    <i class="fas fa-clock nav-icon"></i>
-                    <span class="nav-text">Apply CTO</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-history nav-icon"></i>
-                    <span class="nav-text">Leave History</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-calendar-alt nav-icon"></i>
-                    <span class="nav-text">Calendar</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-user nav-icon"></i>
-                    <span class="nav-text">Profile</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-cog nav-icon"></i>
-                    <span class="nav-text">Settings</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="#" class="nav-link logout-link">
-                    <i class="fas fa-sign-out-alt nav-icon"></i>
-                    <span class="nav-text">Logout</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <header class="header">
-            <div class="header-title">
-                <h1>Employee Dashboard</h1>
-                <p>Department of the Interior and Local Government - Pangasinan</p>
-            </div>
-            <div class="user-profile">
-                <div class="user-avatar">JD</div>
-                <div class="user-info">
-                    <h4>Juan Dela Cruz</h4>
-                    <p>Administrative Officer III</p>
-                </div>
-            </div>
-        </header>
-        
-        <!-- Dashboard Overview -->
+      <!-- Dashboard Overview -->
         <section id="dashboard-overview">
             <h2 class="section-title">Overview</h2>
             <div class="dashboard-cards">
@@ -184,7 +377,10 @@
             <!-- Leave Balance Table -->
             <section id="leave-balance-section">
                 <div class="leave-balance-container">
-                    <h2 class="section-title">Leave Credits Balance</h2>
+                    <div class="section-title">
+                        <h2>Leave Credits Balance</h2>
+                        <button class="btn-view-all">View Details</button>
+                    </div>
                     <div class="table-responsive">
                         <table>
                             <thead>
@@ -255,7 +451,10 @@
             <!-- Recent Activities -->
             <section id="recent-activities-section">
                 <div class="recent-activities-container">
-                    <h2 class="section-title">Recent Activities</h2>
+                    <div class="section-title">
+                        <h2>Recent Activities</h2>
+                        <button class="btn-view-all">View All</button>
+                    </div>
                     <ul class="activity-list">
                         <li class="activity-item">
                             <div class="activity-icon">
@@ -310,127 +509,42 @@
                     </ul>
                 </div>
             </section>
-        </div>
-        
-        <!-- Leave Form Container -->
-        <div class="form-container" id="leave-form-container">
-           <div class="cto-form-header">
-                <h2>DEPARTMENT OF THE INTERIOR AND LOCAL GOVERNMENT</h2>
-                <h3>Regional Office I</h3>
-                <h2>APPLICATION FOR LEAVE</h2>
-            </div>
-            <form id="leave-application-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="leave-type">Type of Leave</label>
-                        <select id="leave-type" class="form-control" required>
-                            <option value="">Select Leave Type</option>
-                            <option value="Vacation Leave">Vacation Leave</option>
-                            <option value="Mandatory/Forced Leave">Mandatory/Forced Leave</option>
-                            <option value="Sick Leave">Sick Leave</option>
-                            <option value="Maternity Leave">Maternity Leave</option>
-                            <option value="Paternity Leave">Paternity Leave</option>
-                            <option value="Special Privilege Leave">Special Privilege Leave</option>
-                            <option value="Solo Parent Leave">Solo Parent Leave</option>
-                            <option value="Study Leave">Study Leave</option>
-                            <option value="VAWC Leave">VAWC Leave</option>
-                            <option value="Rehabilitation Leave">Rehabilitation Leave</option>
-                            <option value="Special Leave Benefits for Women">Special Leave Benefits for Women</option>
-                            <option value="Special Emergency (Calamity) Leave">Special Emergency (Calamity) Leave</option>
-                            <option value="Monetization of Leave Credits">Monetization of Leave Credits</option>
-                            <option value="Terminal Leave">Terminal Leave</option>
-                            <option value="Adoption Leave">Adoption Leave</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="employee-name">Employee Name</label>
-                        <input type="text" id="employee-name" class="form-control" value="Juan Dela Cruz" readonly>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="start-date">Start Date</label>
-                        <input type="date" id="start-date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="end-date">End Date</label>
-                        <input type="date" id="end-date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="number-of-days">Number of Days</label>
-                        <input type="number" id="number-of-days" class="form-control" min="0.5" max="30" step="0.5" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reason">Reason for Leave</label>
-                    <textarea id="reason" class="form-control" rows="4" placeholder="Please provide a reason for your leave..." required></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="contact-during-leave">Contact During Leave</label>
-                    <input type="text" id="contact-during-leave" class="form-control" placeholder="Mobile number or email address" required>
-                </div>
-                
-                <button type="submit" class="btn-submit">Submit Leave Application</button>
-            </form>
-        </div>
-        
-        <!-- CTO Form Container -->
-        <div class="form-container" id="cto-form-container">
-            <div class="cto-form-header">
-                <h2>DEPARTMENT OF THE INTERIOR AND LOCAL GOVERNMENT</h2>
-                <h3>Regional Office I</h3>
-                <h2>COMPENSATORY TIME-OFF (CTO) APPLICATION FORM</h2>
-            </div>
-            
-            <form id="cto-application-form">
-                <!-- For Personnel Section/Division Use Only -->
-                <div class="form-section">
-                    <div class="form-section-title">FOR PERSONNEL SECTION/DIVISION USE ONLY</div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="cto-name">Name</label>
-                            <input type="text" id="cto-name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cto-position">Position</label>
-                            <input type="text" id="cto-position" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="cto-office">Office</label>
-                            <input type="text" id="cto-office" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cto-filing-date">Date of Filing</label>
-                            <input type="date" id="cto-filing-date" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="cto-hours-applied">No. of hours Applied for</label>
-                            <input type="number" id="cto-hours-applied" class="form-control" min="1" max="24" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cto-inclusive-dates">Inclusive Date/s</label>
-                            <input type="text" id="cto-inclusive-dates" class="form-control" required>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <button type="submit" class="btn-submit">Submit CTO Application</button>
-            </form>
-        </div>
+        </div>  
         
         <footer class="footer">
             <p>DILG Pangasinan Employee Dashboard &copy; 2026 | Department of the Interior and Local Government - Region I</p>
         </footer>
-    </main>
 
-    <script src="/js/Employees/EmployeeDashboard.js"></script>
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for view all buttons
+            const viewAllButtons = document.querySelectorAll('.btn-view-all');
+            
+            viewAllButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const section = this.closest('section');
+                    const title = section.querySelector('h2').textContent;
+                    alert(`Viewing all ${title}. This would navigate to a detailed page in a full implementation.`);
+                });
+            });
+            
+            // Animate card numbers on load
+            const cardNumbers = document.querySelectorAll('.card h3');
+            cardNumbers.forEach(number => {
+                const targetValue = parseInt(number.textContent);
+                let currentValue = 0;
+                const increment = targetValue / 20;
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= targetValue) {
+                        currentValue = targetValue;
+                        clearInterval(timer);
+                    }
+                    number.textContent = Math.floor(currentValue);
+                }, 50);
+            });
+        });
+    </script>
 </body>
-</html>
+</x-layout2>
