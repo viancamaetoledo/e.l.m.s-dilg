@@ -15,6 +15,7 @@ Route::get('/User-Dashboard', [NavigationController::class, 'goUserDashboard'])-
 Route::get('/User-Dashboard', [NavigationController::class, 'goUserDashboard'])->name('user.dashboard');
 Route::get('/Leave-Application-Form', [NavigationController::class, 'goLeaveForm'])->name('user.leave-form');
 Route::get('/CTO-Application-Form', [NavigationController::class, 'goCTOForm'])->name('user.cto-form');
+Route::get('/Employee-Leave-Summary', [NavigationController::class, 'goEmployeeLeaveSummary'])->name('user.summary');
 
 
 

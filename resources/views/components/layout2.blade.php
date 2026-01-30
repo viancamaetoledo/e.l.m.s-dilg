@@ -22,6 +22,9 @@
                 <li><a href="{{ route('user.dashboard') }}"  class="nav-item" data-tab="overview">
                     <i class="fas fa-tachometer-alt"></i> <span>Overview Dashboard</span>
                 </a></li>
+                <li><a href="{{ route('user.summary') }}"  class="nav-item" data-tab="overview">
+                    <i class="fas fa-tachometer-alt"></i> <span>Balance Summary</span>
+                </a></li>
                 <li><a href="{{ route('user.leave-form') }}" class="nav-item" data-tab="leave-applications">
                     <i class="fas fa-clipboard-list"></i> <span>Leave Applications</span>
                     <span class="badge badge-nav">18</span>
