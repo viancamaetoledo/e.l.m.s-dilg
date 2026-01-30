@@ -21,6 +21,8 @@ Route::get('/Employee-Leave-Summary', [NavigationController::class, 'goEmployeeL
 
 
 Route::get('/Admin-Dashboard', [NavigationController::class, 'goAdminDashboard'])->name('admin.dashboard');
+<<<<<<< HEAD
+=======
 Route::get('/Employee-Info-Credit', [NavigationController::class, 'goEmployeeInfoCredit'])->name('admin.employee-info-credit');
 Route::get('/Show-Employee-Leave-Cards', [NavigationController::class, 'goShowEmployeeLeaveCard'])->name('admin.show-employee-leave-cards');
 Route::get('/Admin-Leave-Application', [NavigationController::class, 'goAdminLeaveRecord'])->name('admin.leave-record');
@@ -31,3 +33,4 @@ Route::get('/Admin-Settings', [NavigationController::class, 'goAdminSettings'])-
 
 
 
+>>>>>>> e39fd0a (info-credit)
