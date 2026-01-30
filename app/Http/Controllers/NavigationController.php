@@ -52,6 +52,11 @@ class NavigationController extends Controller
         return view('Navigation/Administration/Admin-Settings');
 
     }
+    public function goEmployeeLeaveSummary()
+    {
+        return view('Navigation/Employees/Leave-Summary');
+
+    }
 
 
     public function goShowEmployeeLeaveCard()

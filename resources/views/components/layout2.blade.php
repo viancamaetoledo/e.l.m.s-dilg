@@ -248,53 +248,52 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Department_of_the_Interior_and_Local_Government_%28DILG%29_Seal_-_Logo.svg" alt="DILG Logo" class="sidebar-logo">
-            <div class="sidebar-title">
-                <h3>DILG ELMS</h3>
-                <p>Employee Dashboard</p>
+   <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="/image/DILG-logo.png" alt="DILG Logo" class="brand-logo">
+                <div class="sidebar-title">
+                    <h3>DILG ELMS</h3>
+                    <p>Employee Dashboard</p>
+                </div>
             </div>
-        </div>
-        
-        <ul class="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" id="overview-link" data-tab="overview">
-                    <span class="nav-icon"><i class="fas fa-tachometer-alt"></i></span>
-                    <span class="nav-text">Overview Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="leave-link" data-tab="leave-applications">
-                    <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
-                    <span class="nav-text">Leave Applications</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="cto-link" data-tab="cto-applications">
-                    <span class="nav-icon"><i class="fas fa-business-time"></i></span>
-                    <span class="nav-text">CTO Applications</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="calendar-link" data-tab="calendar">
-                    <span class="nav-icon"><i class="fas fa-calendar-alt"></i></span>
-                    <span class="nav-text">Calendar</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="settings-link" data-tab="settings">
-                    <span class="nav-icon"><i class="fas fa-cog"></i></span>
-                    <span class="nav-text">Settings</span>
-                </a>
-            </li>
-        </ul>
-        
-        <div class="sidebar-footer">
-            <p>DILG Pangasinan ELMS v2.1</p>
-        </div>
-    </aside>
+            
+            <ul class="nav-menu">
+                <li><a href="{{ route('user.dashboard') }}"  class="nav-item" data-tab="overview">
+                    <i class="fas fa-tachometer-alt"></i> <span>Overview Dashboard</span>
+                </a></li>
+                <li><a href="{{ route('user.summary') }}"  class="nav-item" data-tab="overview">
+                    <i class="fas fa-tachometer-alt"></i> <span>Balance Summary</span>
+                </a></li>
+                <li><a href="{{ route('user.leave-form') }}" class="nav-item" data-tab="leave-applications">
+                    <i class="fas fa-clipboard-list"></i> <span>Leave Applications</span>
+                    <span class="badge badge-nav">18</span>
+                </a></li>
+                <li><a href="{{ route('user.cto-form') }}"class="nav-item" data-tab="cto-applications">
+                    <i class="fas fa-clock"></i> <span>CTO Applications</span>
+                    <span class="badge badge-nav">9</span>
+                </a></li>
+                <li><a href="#" class="nav-item" data-tab="calendar">
+                    <i class="fas fa-calendar-alt"></i> <span>Calendar</span>
+                </a></li>
+            </ul>
+            
+
+            <div class="user-profile">
+                        <div class="user-avatar">AD</div>
+                        <div class="user-info">
+                            <h4>Admin User</h4>
+                            <p>Administrator</p>
+                        </div>
+                    </div>
+            
+            <div class="sidebar-footer">
+                    <a href="{{ route('welcome.landing') }}" class="nav-item">
+                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                    </a>
+                <p class="version">v2.1.4</p>
+            </div>
+        </nav>
 
     <div class="main-content">
         <main>
