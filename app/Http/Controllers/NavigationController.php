@@ -19,8 +19,6 @@ class NavigationController extends Controller
     {
         return view('welcome');
     }
-<<<<<<< HEAD
-=======
 
     public function goLeaveForm()
     {
@@ -64,5 +62,4 @@ class NavigationController extends Controller
 
 
 
->>>>>>> e39fd0a (info-credit)
 }
