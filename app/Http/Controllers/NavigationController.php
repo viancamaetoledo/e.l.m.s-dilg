@@ -12,12 +12,17 @@ class NavigationController extends Controller
     }
     public function goAdminDashboard()
     {
-        return view('Navigation/Administration/Admin-Dashboard');
+        return view('Navigation/Administration/Leave-Management/Admin-Leave-Dashboard');
     }
 
     public function Welcome()
     {
         return view('welcome');
+    }
+
+    public function AdminWelcome()
+    {
+        return view('Admin-Welcome');
     }
 
     public function goLeaveForm()
@@ -32,12 +37,12 @@ class NavigationController extends Controller
 
     public function goEmployeeInfoCredit()
     {
-        return view('Navigation/Administration/Employee/Employee-Info-Credit');
+        return view('Navigation/Administration/Leave-Management/Employee/Employee-Info-Credit');
     }
 
     public function goAdminLeaveRecord()
     {
-        return view('Navigation/Administration/Leave-Application');
+            return view('Navigation/Administration//Leave-Management/Leave-Application');
     }
     public function goAdminCTORecord()
     {
@@ -61,9 +66,15 @@ class NavigationController extends Controller
 
     public function goShowEmployeeLeaveCard()
         {
-            return view('Navigation/Administration/Employee/Employee-Show-Credit');
+            return view('Navigation/Administration/Leave-Management/Employee/Employee-Show-Credit');
 
         }
+
+    public function goEmployeeCalendar()
+    {
+        return view('Navigation/Employees/Calendar');
+
+    }
 
 
 

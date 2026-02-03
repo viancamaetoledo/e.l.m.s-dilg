@@ -5,19 +5,8 @@ use App\Http\Controllers\NavigationController;
 
 
 Route::get('/', [NavigationController::class, 'Welcome'])->name('welcome.landing');
+Route::get('/Admin-Welcome', [NavigationController::class, 'AdminWelcome'])->name('admin.welcome');
 Route::get('/User-Dashboard', [NavigationController::class, 'goUserDashboard'])->name('user.dashboard');
-
-
-
-
-
-
-Route::get('/User-Dashboard', [NavigationController::class, 'goUserDashboard'])->name('user.dashboard');
-Route::get('/Leave-Application-Form', [NavigationController::class, 'goLeaveForm'])->name('user.leave-form');
-Route::get('/CTO-Application-Form', [NavigationController::class, 'goCTOForm'])->name('user.cto-form');
-Route::get('/Employee-Leave-Summary', [NavigationController::class, 'goEmployeeLeaveSummary'])->name('user.summary');
-
-
 
 
 Route::get('/Admin-Dashboard', [NavigationController::class, 'goAdminDashboard'])->name('admin.dashboard');
@@ -31,3 +20,16 @@ Route::get('/Admin-Settings', [NavigationController::class, 'goAdminSettings'])-
 
 
 
+// CTO Routes
+
+
+// Leave Routes
+
+// Admin Routes
+
+// Employee Routes
+Route::get('/User-Dashboard', [NavigationController::class, 'goUserDashboard'])->name('user.dashboard');
+Route::get('/Leave-Application-Form', [NavigationController::class, 'goLeaveForm'])->name('user.leave-form');
+Route::get('/CTO-Application-Form', [NavigationController::class, 'goCTOForm'])->name('user.cto-form');
+Route::get('/Employee-Leave-Summary', [NavigationController::class, 'goEmployeeLeaveSummary'])->name('user.summary');
+Route::get('/Employee-Calendar', [NavigationController::class, 'goEmployeeCalendar'])->name('user.calendar');

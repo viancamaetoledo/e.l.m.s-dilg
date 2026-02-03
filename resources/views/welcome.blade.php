@@ -655,6 +655,7 @@
                         <li><a href="#">Official Website</a></li>
                         <li><a href="{{ route('user.dashboard') }}">employee</a></li>
                         <li><a href="{{ route('admin.dashboard') }}">admin</a></li>
+                        <li><a href="{{ route('admin.welcome') }}">admin</a></li>
                     </ul>
                 </div>
                 <div class="footer-info">

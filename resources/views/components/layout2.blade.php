@@ -33,7 +33,7 @@
                     <i class="fas fa-clock"></i> <span>CTO Applications</span>
                     <span class="badge badge-nav">9</span>
                 </a></li>
-                <li><a href="#" class="nav-item" data-tab="calendar">
+                <li><a href="{{ route('user.calendar') }}" class="nav-item" data-tab="calendar">
                     <i class="fas fa-calendar-alt"></i> <span>Calendar</span>
                 </a></li>
             </ul>
